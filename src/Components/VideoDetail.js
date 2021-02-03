@@ -1,11 +1,11 @@
 import React from 'react'
-import ItemList from './VideoItem'
 
 class VideoDetail extends React.Component{
+
     render(){
         return(
             <div>
-                <ItemList/>
+               the current video id is: {this.props.video.length}
             </div>
         );
     }
