@@ -15,10 +15,9 @@ class App extends React.Component {
                 }
             });
             this.setState({
-                videos: response.data.items,
-                firstVideo: response.data.items[0]
+                videos: response.data.items
             });
-            console.log(response)
+            //console.log(response)
         }
 
     render() {
@@ -26,7 +25,7 @@ class App extends React.Component {
             <div className="ui container">App Component
                 <SearchBar onSearchSubmit={this.onSearchSubmit} />
                 I have {this.state.videos.length} videos right now
-                <VideoDetail video={this.state.firstVideo} />
+                <VideoDetail video={this.state.videos} />
                 <VideoList videos={this.state.videos}  />
             </div>
         );
