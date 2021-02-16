@@ -5,7 +5,7 @@ import VideoItem from './VideoItem'
 const VideoList = ({ videos, onSelectVideo }) => {
 
     const renderVideo = videos.map((video) => {
-        return <VideoItem video={video} onSelectVideo={onSelectVideo} />;
+        return <VideoItem key={video.id.videoId} video={video} onSelectVideo={onSelectVideo} />;
     });
 
     return (

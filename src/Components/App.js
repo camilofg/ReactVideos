@@ -5,8 +5,12 @@ import VideoDetail from './VideoDetail'
 import VideoList from './VideoList'
 
 class App extends React.Component {
-    
-    state = { videos: [], selectedVideo : null }
+    state = { videos: [], selectedVideo: null }
+
+    componentDidMount(){
+        this.onSearchSubmit('dogs'); 
+    }
+
     onSearchSubmit = async term => {
         const response = await youtube.get('/search',
             {
@@ -15,21 +19,29 @@ class App extends React.Component {
                 }
             });
         this.setState({
-            videos: response.data.items
+            videos: response.data.items,
+            selectedVideo: response.data.items[0]
         });
     }
 
-    onSelectVideo = id => {
-        const video = this.state.videos.filter(e => e.id === id);
+    onSelectVideo = video => {
         this.setState({ selectedVideo: video })
     }
 
     render() {
         return (
-            <div className="ui container">App Component
+            <div className="ui container">
                 <SearchBar onSearchSubmit={this.onSearchSubmit} />
-                <VideoDetail video={this.state.selectedVideo} />
-                <VideoList onSelectVideo={this.onSelectVideo} videos={this.state.videos} />
+                <div className="ui grid">
+                    <div className="ui row">
+                        <div className="eleven wide column">
+                            <VideoDetail video={this.state.selectedVideo} />
+                        </div>
+                        <div className="five wide column">
+                            <VideoList onSelectVideo={this.onSelectVideo} videos={this.state.videos} />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
